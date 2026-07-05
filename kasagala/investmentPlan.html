@@ -1,0 +1,1030 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Plans - Kasagala Group of Companies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===================================================================
+           DESIGN TOKENS
+           Palette drawn from the plantation/agro world this company sits in:
+           deep tea-leaf green, cinnamon bark, clay soil, morning mist.
+           =================================================================== */
+        :root {
+            --bark-900:   #16281c;   /* deep canopy shadow */
+            --leaf-700:   #1f5c3a;   /* primary green */
+            --leaf-500:   #3f8a5c;   /* mid green */
+            --leaf-200:   #cfe6d6;   /* pale leaf tint */
+            --cinnamon:   #b5713c;   /* warm accent, from cinnamon bark */
+            --clay:       #e9e0d1;   /* soil/paper background */
+            --mist:       #f6f4ee;   /* page background */
+            --ink:        #22281f;
+            --ink-soft:   #5b6156;
+            --line:       #dcd6c6;
+            --white:      #ffffff;
+
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body: 'Manrope', 'Segoe UI', sans-serif;
+
+            --radius: 14px;
+            --shadow-soft: 0 10px 30px rgba(22, 40, 28, 0.08);
+            --shadow-lift: 0 20px 50px rgba(22, 40, 28, 0.16);
+
+            /* Dark-mode palette — deep navy blue, matched to the requested swatch */
+            --dark-bg:     #0f172a;
+            --dark-card:   #1e293b;
+            --dark-border: #334155;
+            --dark-text:   #cbd5e1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            /* Ambient gradient background shared with awords.html, instead of
+               a flat mist tint, so the two pages feel like one design system. */
+            background: linear-gradient(160deg, #eaf6ec 0%, #d7ecd9 25%, #c3e6c8 50%, #d7ecd9 75%, #eaf6ec 100%);
+            background-attachment: fixed;
+            color: var(--ink);
+            font-family: var(--font-body);
+            line-height: 1.65;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        img { max-width: 100%; display: block; }
+
+        a { color: inherit; }
+
+        /* ---------- reveal-on-scroll ---------- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal.in-view { transition: none; transform: none; opacity: 1; }
+            * { animation: none !important; }
+        }
+
+        /* ===================================================================
+           TOP BAR
+           =================================================================== */
+        .top-bar {
+            background-color: var(--bark-900);
+            color: #cfe0d3;
+            padding: 9px 0;
+            font-size: 12.5px;
+        }
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .social-icons a {
+            color: #cfe0d3;
+            margin-right: 14px;
+            text-decoration: none;
+            opacity: 0.85;
+            transition: opacity 0.2s, transform 0.2s;
+            display: inline-block;
+        }
+        .social-icons a:hover { opacity: 1; transform: translateY(-2px); }
+        .contact-info span { margin-left: 22px; }
+        .contact-info i { color: var(--cinnamon); margin-right: 6px; }
+
+        /* ===================================================================
+           HEADER
+           =================================================================== */
+        .main-header {
+            background-color: rgba(246, 244, 238, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--line);
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-area { display: flex; align-items: center; }
+        .brand-logo {
+            height: 52px;
+            margin-right: 12px;
+            border-radius: 8px;
+        }
+        .brand-text h1 {
+            font-family: var(--font-display);
+            font-size: 21px;
+            color: var(--leaf-700);
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            line-height: 1.1;
+            transition: color 0.4s ease;
+        }
+        .brand-text h2 {
+            font-size: 11.5px;
+            color: var(--cinnamon);
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .nav-area { display: flex; align-items: center; }
+        .nav-menu ul { display: flex; list-style: none; }
+        .nav-menu ul li { margin-left: 26px; }
+        .nav-menu ul li a {
+            text-decoration: none;
+            color: var(--ink);
+            font-weight: 600;
+            font-size: 13.5px;
+            letter-spacing: 0.2px;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s;
+        }
+        .nav-menu ul li a::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 0; height: 2px;
+            background: var(--cinnamon);
+            transition: width 0.25s ease;
+        }
+        .nav-menu ul li a:hover::after,
+        .nav-menu ul li a.active::after { width: 100%; }
+        .nav-menu ul li a.active { color: var(--leaf-700); }
+
+        /* --- Light / Dark mode toggle button --- */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--white);
+            color: var(--leaf-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 26px;
+            font-size: 15px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(22,40,28,0.08);
+            transition: background-color 0.3s, color 0.3s, transform 0.3s ease, border-color 0.3s;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.08) rotate(-8deg);
+            border-color: var(--leaf-500);
+        }
+        .theme-toggle:active { transform: scale(0.94); }
+
+        /* ===================================================================
+           HERO
+           =================================================================== */
+        .plan-hero {
+            position: relative;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            background: linear-gradient(160deg, var(--bark-900) 0%, var(--leaf-700) 100%);
+            overflow: hidden;
+        }
+        /* soft animated canopy texture, pure CSS, no external image dependency */
+        .hero-canopy {
+            position: absolute;
+            inset: 0;
+            opacity: 0.5;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(255,255,255,0.06) 0, transparent 40%),
+                radial-gradient(circle at 85% 15%, rgba(181,113,60,0.18) 0, transparent 45%),
+                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.05) 0, transparent 40%);
+            animation: driftCanopy 18s ease-in-out infinite alternate;
+        }
+        @keyframes driftCanopy {
+            0%   { transform: scale(1) translate(0,0); }
+            100% { transform: scale(1.08) translate(-1.5%, 1%); }
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12.5px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--leaf-200);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 22px;
+        }
+        .hero-eyebrow i { color: var(--cinnamon); }
+        .plan-hero-content { position: relative; z-index: 2; max-width: 760px; }
+        .plan-hero-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(34px, 4.5vw, 52px);
+            font-weight: 700;
+            line-height: 1.08;
+            margin-bottom: 18px;
+        }
+        .plan-hero-content p {
+            font-size: 17px;
+            color: #dfe9df;
+            max-width: 620px;
+        }
+
+        /* disclosure banner sitting directly under the hero claim */
+        .disclosure-strip {
+            background-color: #fff6e6;
+            border-top: 1px solid #f0dfae;
+            border-bottom: 1px solid #f0dfae;
+            padding: 14px 0;
+            font-size: 13.5px;
+            color: #6b5626;
+            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+        }
+        .disclosure-strip .container {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .disclosure-strip i { color: var(--cinnamon); margin-top: 2px; }
+
+        /* ===================================================================
+           SMART PLAN FINDER
+           =================================================================== */
+        .finder-section { margin-top: -46px; position: relative; z-index: 10; }
+        .finder-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lift);
+            border-top: 4px solid var(--leaf-700);
+            transition: background-color 0.4s ease;
+        }
+        .finder-card h3 {
+            font-family: var(--font-display);
+            color: var(--leaf-700);
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .finder-form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) auto;
+            gap: 20px;
+            align-items: flex-end;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.4px; transition: color 0.4s ease; }
+        .form-group select, .form-group input {
+            padding: 11px 13px;
+            border: 1.5px solid var(--line);
+            border-radius: 8px;
+            background-color: #fbfaf6;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--ink);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
+        }
+        .form-group select:focus, .form-group input:focus {
+            border-color: var(--leaf-500);
+            box-shadow: 0 0 0 3px rgba(63,138,92,0.15);
+        }
+        .btn-find {
+            padding: 12px 26px;
+            background-color: var(--leaf-700);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.15s;
+            height: 44px;
+        }
+        .btn-find:hover { background-color: var(--bark-900); transform: translateY(-1px); }
+        .btn-find:active { transform: translateY(0); }
+
+        /* ===================================================================
+           SECTION SHARED
+           =================================================================== */
+        .section-padding { padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 54px; }
+        .section-eyebrow {
+            display: block;
+            font-size: 12.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--cinnamon);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .section-title h2 {
+            font-family: var(--font-display);
+            color: var(--bark-900);
+            font-size: clamp(26px, 3vw, 34px);
+            font-weight: 600;
+            transition: color 0.4s ease;
+        }
+        .section-title p.section-sub {
+            max-width: 620px;
+            margin: 14px auto 0;
+            color: var(--ink-soft);
+            font-size: 15px;
+            transition: color 0.4s ease;
+        }
+        .title-underline {
+            width: 56px; height: 3px;
+            background-color: var(--cinnamon);
+            margin: 16px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ===================================================================
+           HANDBILL / PORTFOLIO CARDS
+           =================================================================== */
+        .handbill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+        .handbill-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.4s ease;
+        }
+        .handbill-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lift);
+        }
+        .handbill-image-box {
+            position: relative;
+            background: linear-gradient(135deg, var(--leaf-200), var(--clay));
+            height: 220px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.4s ease;
+        }
+        .handbill-image-box i {
+            font-size: 54px;
+            color: var(--leaf-700);
+            opacity: 0.35;
+            transition: transform 0.4s ease;
+        }
+        .handbill-card:hover .handbill-image-box i { transform: scale(1.1) rotate(-4deg); }
+        .handbill-badge {
+            position: absolute;
+            top: 15px; left: 15px;
+            background-color: var(--bark-900);
+            color: var(--white);
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 6px 13px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        .handbill-content { padding: 26px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .handbill-content h3 {
+            font-family: var(--font-display);
+            color: var(--ink);
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            transition: color 0.4s ease;
+        }
+        .handbill-content p { font-size: 14px; color: var(--ink-soft); margin-bottom: 22px; transition: color 0.4s ease; }
+        .plan-fact-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12.5px;
+            color: var(--ink-soft);
+            border-top: 1px dashed var(--line);
+            padding-top: 14px;
+            margin-bottom: 14px;
+            transition: color 0.4s ease, border-color 0.4s ease;
+        }
+        .plan-fact-row strong { color: var(--ink); transition: color 0.4s ease; }
+        .guarantee-note {
+            display: flex; align-items: center; gap: 9px;
+            font-size: 12.5px; color: var(--leaf-700); font-weight: 700;
+            background-color: var(--leaf-200);
+            padding: 10px 14px; border-radius: 8px; width: fit-content;
+            transition: background-color 0.4s ease;
+        }
+
+        /* ===================================================================
+           PROCESS STEPS
+           =================================================================== */
+        .onboarding-bg { background-color: rgba(244, 240, 226, 0.55); transition: background-color 0.4s ease; }
+        .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+        .step-item {
+            background-color: var(--white);
+            padding: 34px 22px 26px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            transition: transform 0.3s ease, background-color 0.4s ease;
+        }
+        .step-item:hover { transform: translateY(-4px); }
+        .step-number {
+            width: 38px; height: 38px;
+            background: var(--cinnamon);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 15px;
+            margin: -52px auto 16px;
+            border: 4px solid var(--clay);
+            transition: border-color 0.4s ease;
+        }
+        .step-item i { font-size: 26px; color: var(--leaf-700); margin-bottom: 14px; display: block; }
+        .step-item h4 { font-family: var(--font-display); font-size: 16.5px; color: var(--ink); margin-bottom: 8px; font-weight: 600; transition: color 0.4s ease; }
+        .step-item p { font-size: 13px; color: var(--ink-soft); transition: color 0.4s ease; }
+
+        /* ===================================================================
+           ESTIMATE TOOL (renamed from "dividend calculator")
+           =================================================================== */
+        .calculator-wrapper {
+            background: var(--white);
+            padding: 46px;
+            border-radius: 18px;
+            box-shadow: var(--shadow-lift);
+            border: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 42px;
+            position: relative;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+        .calc-inputs-pane { display: flex; flex-direction: column; gap: 20px; }
+        .calc-inputs-pane h3 { font-family: var(--font-display); font-size: 23px; color: var(--leaf-700); font-weight: 600; }
+        .calc-inputs-pane > p { color: var(--ink-soft); font-size: 14px; transition: color 0.4s ease; }
+        .input-box-wrapper { position: relative; }
+        .input-box-wrapper span {
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            font-weight: 700; color: var(--leaf-700);
+        }
+        .input-box-wrapper input {
+            width: 100%;
+            padding: 15px 15px 15px 56px;
+            font-size: 16px;
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            outline: none;
+            font-weight: 600;
+            font-family: var(--font-body);
+            background-color: #fbfaf6;
+            transition: border-color 0.25s, box-shadow 0.25s, background-color 0.3s, color 0.3s;
+        }
+        .input-box-wrapper input:focus { border-color: var(--leaf-500); box-shadow: 0 0 0 3px rgba(63,138,92,0.15); }
+        .duration-selector { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .duration-option {
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            padding: 12px 5px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13.5px;
+            background-color: var(--white);
+            transition: all 0.2s ease;
+        }
+        .duration-option:hover { border-color: var(--leaf-500); background-color: #f4faf6; }
+        .duration-option.active { border-color: var(--leaf-700); background-color: var(--leaf-700); color: var(--white); }
+
+        .calc-results-pane {
+            background: linear-gradient(160deg, var(--leaf-700), var(--bark-900));
+            color: var(--white);
+            padding: 36px;
+            border-radius: 14px;
+            display: flex; flex-direction: column; justify-content: center;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.18);
+        }
+        .result-row { margin-bottom: 24px; }
+        .result-row:last-child { margin-bottom: 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .result-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #b9d9c4; font-weight: 700; margin-bottom: 6px; }
+        .result-value { font-size: 30px; font-weight: 800; transition: opacity 0.25s; }
+        .result-value.total-payout { font-size: 24px; color: #d8f3e1; }
+        .rate-notice { font-size: 12px; color: #b9d9c4; margin-top: 16px; display: flex; align-items: flex-start; gap: 6px; line-height: 1.5; }
+
+        .calc-footnote {
+            grid-column: 1 / -1;
+            font-size: 12px;
+            color: var(--ink-soft);
+            border-top: 1px dashed var(--line);
+            padding-top: 18px;
+            display: flex;
+            gap: 8px;
+            transition: color 0.4s ease, border-color 0.4s ease;
+        }
+        .calc-footnote i { color: var(--cinnamon); margin-top: 2px; }
+
+        /* ===================================================================
+           FOOTER
+           =================================================================== */
+        .footer-note {
+            background-color: var(--bark-900);
+            color: #cfe0d3;
+            text-align: center;
+            padding: 26px 0;
+            font-size: 13.5px;
+        }
+        .footer-note p { margin-top: 6px; opacity: 0.75; font-size: 12px; }
+
+        /* =========================================================
+           DARK MODE THEME OVERRIDES
+           Toggled by adding class="dark-mode" to <body>.
+           This page defaults to the light "mist" theme, so
+           dark-mode is the opt-in variant here (matching the
+           other pages on the site). The solid dark background
+           below intentionally replaces the light gradient.
+           ========================================================= */
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .main-header {
+            background-color: rgba(15, 23, 42, 0.92);
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        body.dark-mode .brand-text h1 { color: var(--leaf-200); }
+
+        body.dark-mode .nav-menu ul li a { color: var(--dark-text); }
+
+        body.dark-mode .nav-menu ul li a.active { color: var(--leaf-200); }
+
+        body.dark-mode .theme-toggle {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+            color: var(--leaf-200);
+            box-shadow: none;
+        }
+
+        body.dark-mode .disclosure-strip {
+            background-color: #2a2412;
+            border-color: #4a3f1f;
+            color: #e7d9ab;
+        }
+
+        body.dark-mode .finder-card { background: var(--dark-card); }
+
+        body.dark-mode .form-group label { color: #9fb09c; }
+
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group input,
+        body.dark-mode .input-box-wrapper input {
+            background-color: #0b1220;
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .section-title h2 { color: var(--leaf-200); }
+
+        body.dark-mode .section-title p.section-sub { color: #9fb09c; }
+
+        body.dark-mode .handbill-card {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .handbill-image-box {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+        }
+
+        body.dark-mode .handbill-content h3 { color: var(--leaf-200); }
+
+        body.dark-mode .handbill-content p { color: #9fb09c; }
+
+        body.dark-mode .plan-fact-row {
+            color: #9fb09c;
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .plan-fact-row strong { color: var(--dark-text); }
+
+        body.dark-mode .guarantee-note {
+            background-color: #1e293b;
+            color: var(--leaf-200);
+        }
+
+        body.dark-mode .onboarding-bg { background-color: #0b1220; }
+
+        body.dark-mode .step-item {
+            background-color: var(--dark-card);
+        }
+
+        body.dark-mode .step-number { border-color: #0b1220; }
+
+        body.dark-mode .step-item h4 { color: var(--dark-text); }
+
+        body.dark-mode .step-item p { color: #9fb09c; }
+
+        body.dark-mode .calculator-wrapper {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+
+        body.dark-mode .calc-inputs-pane > p { color: #9fb09c; }
+
+        body.dark-mode .duration-option {
+            background-color: var(--dark-card);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+
+        body.dark-mode .duration-option:hover {
+            background-color: #24304a;
+            border-color: var(--leaf-500);
+        }
+
+        body.dark-mode .duration-option.active {
+            background-color: var(--leaf-700);
+            border-color: var(--leaf-700);
+            color: var(--white);
+        }
+
+        body.dark-mode .calc-footnote {
+            color: #9fb09c;
+            border-color: var(--dark-border);
+        }
+
+        /* ===================================================================
+           RESPONSIVE
+           =================================================================== */
+        @media (max-width: 992px) {
+            .finder-form-grid { grid-template-columns: 1fr; gap: 15px; }
+            .btn-find { height: auto; padding: 13px; }
+            .handbill-grid { grid-template-columns: 1fr; }
+            .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .calculator-wrapper { grid-template-columns: 1fr; padding: 30px; }
+        }
+        @media (max-width: 768px) {
+            .top-bar-content, .header-content { flex-direction: column; text-align: center; gap: 10px; }
+            .contact-info span { display: block; margin: 5px 0; }
+            .nav-area { flex-direction: column; gap: 10px; }
+            .nav-menu ul { flex-wrap: wrap; justify-content: center; }
+            .nav-menu ul li { margin: 5px 10px; }
+            .theme-toggle { margin-left: 0; }
+            .steps-grid { grid-template-columns: 1fr; }
+            .duration-selector { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="contact-info">
+                <span><i class="fas fa-map-marker-alt"></i> No 219 Colombo Road, Kaluwella, Galle</span>
+                <span><i class="fas fa-envelope"></i> <a href="mailto:info@kasagalagreen.lk">info@kasagalagreen.lk</a></span>
+            </div>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-area">
+                <img src="logo.jpg" alt="Kasagala Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>Kasagala Group</h1>
+                    <h2>of Companies · Galle</h2>
+                </div>
+            </div>
+            <div class="nav-area">
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="awords.html">Awards</a></li>
+                        <li><a href="proposal.html">Proposals</a></li>
+                        <li><a href="investmentPlan.html" class="active">Investment Plans</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="aboutUs.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="galle.html">Open Day</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode" title="Toggle light / dark mode">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="plan-hero">
+        <div class="hero-canopy"></div>
+        <div class="container plan-hero-content">
+            <span class="hero-eyebrow"><i class="fas fa-seedling"></i> KASAGALA Group OF COMPANY</span>
+            <h1>Investment plans, explained plainly</h1>
+            <p>A look at how our plantation and trade ventures are structured, what each plan involves, and how to think through whether one fits your goals and your appetite for risk.</p>
+        </div>
+    </section>
+
+
+
+    <section class="section-padding" id="portfolioSection">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="section-eyebrow">Our Ventures</span>
+                <h2>Plans by Capital Tier</h2>
+                <p class="section-sub">Each plan is tied to a different part of the business. Ask your branch manager for the plan document, current terms, and past performance before deciding.</p>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="handbill-grid">
+                <div class="handbill-card reveal" id="tier-low">
+                    <div class="handbill-image-box">
+                        <div class="handbill-badge">Entry Tier</div>
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="handbill-content">
+                        <div>
+                            <h3>Community Retail Plan</h3>
+                            <p>Capital directed toward regional consumer-center stock and turnover. Designed for first-time investors starting with a smaller amount.</p>
+                            <div class="plan-fact-row"><span>Typical horizon</span><strong>1 year</strong></div>
+                            <div class="plan-fact-row"><span>Payout style</span><strong>Periodic, subject to performance</strong></div>
+                        </div>
+                        <div class="guarantee-note"><i class="fas fa-shield-alt"></i> Ask us for the current risk profile</div>
+                    </div>
+                </div>
+
+                <div class="handbill-card reveal" id="tier-mid">
+                    <div class="handbill-image-box">
+                        <div class="handbill-badge">Agro Tier</div>
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="handbill-content">
+                        <div>
+                            <h3>Eco Plantation Plan</h3>
+                            <p>Linked to cinnamon processing and bio-fertiliser operations in the Southern Province. Returns depend on harvest cycles and market prices.</p>
+                            <div class="plan-fact-row"><span>Typical horizon</span><strong>2–3 years</strong></div>
+                            <div class="plan-fact-row"><span>Payout style</span><strong>Tied to seasonal output</strong></div>
+                        </div>
+                        <div class="guarantee-note"><i class="fas fa-leaf"></i> Backed by identified plantation assets</div>
+                    </div>
+                </div>
+
+                <div class="handbill-card reveal" id="tier-high">
+                    <div class="handbill-image-box">
+                        <div class="handbill-badge">Trade Tier</div>
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <div class="handbill-content">
+                        <div>
+                            <h3>Import–Export Allocation</h3>
+                            <p>Exposure to shipping turnaround and commodity logistics. Suited to investors comfortable with more market-driven variability.</p>
+                            <div class="plan-fact-row"><span>Typical horizon</span><strong>2+ years</strong></div>
+                            <div class="plan-fact-row"><span>Payout style</span><strong>Variable, market-linked</strong></div>
+                        </div>
+                        <div class="guarantee-note"><i class="fas fa-chart-line"></i> Returns move with market conditions</div>
+                    </div>
+                </div>
+
+                <div class="handbill-card reveal">
+                    <div class="handbill-image-box">
+                        <div class="handbill-badge">Private Tier</div>
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="handbill-content">
+                        <div>
+                            <h3>Enterprise Capital Plan</h3>
+                            <p>A tailored arrangement for larger corporate accounts, including a dedicated account manager and a custom payout schedule.</p>
+                            <div class="plan-fact-row"><span>Typical horizon</span><strong>3+ years</strong></div>
+                            <div class="plan-fact-row"><span>Payout style</span><strong>Custom, set out in contract</strong></div>
+                        </div>
+                        <div class="guarantee-note"><i class="fas fa-user-tie"></i> Terms confirmed in writing before signing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding onboarding-bg">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="section-eyebrow">Process</span>
+                <h2>How Onboarding Works</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-item reveal">
+                    <div class="step-number">1</div>
+                    <i class="fas fa-user-check"></i>
+                    <h4>Tell us your goals</h4>
+                    <p>Share your budget, timeline, and what you're hoping the investment achieves.</p>
+                </div>
+                <div class="step-item reveal">
+                    <div class="step-number">2</div>
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h4>Review a matching plan</h4>
+                    <p>A branch manager walks you through the plan document, terms, and risks in full.</p>
+                </div>
+                <div class="step-item reveal">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-signature"></i>
+                    <h4>Sign at our Galle office</h4>
+                    <p>Contracts are notarised, and asset details are recorded in your name.</p>
+                </div>
+                <div class="step-item reveal">
+                    <div class="step-number">4</div>
+                    <i class="fas fa-wallet"></i>
+                    <h4>Track your payouts</h4>
+                    <p>Statements are issued on the agreed cycle, reflecting actual performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="section-eyebrow">Planning Tool</span>
+                <h2>Example Payout Estimator</h2>
+                <p class="section-sub">This tool shows a hypothetical example only, using a sample rate you can edit — it does not reflect a promised or guaranteed rate of return.</p>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="calculator-wrapper reveal">
+                <div class="calc-inputs-pane">
+                    <div>
+                        <h3>Try an example scenario</h3>
+                        <p>Enter an amount and pick a duration to see what a sample annual rate would produce. Change the rate field to test your own assumptions.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Amount to model (LKR)</label>
+                        <div class="input-box-wrapper">
+                            <span>Rs.</span>
+                            <input type="number" id="investAmount" value="1000000" min="100000" step="50000" oninput="calculateDividends()">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sample annual rate to model (%)</label>
+                        <div class="input-box-wrapper">
+                            <span>%</span>
+                            <input type="number" id="sampleRate" value="8" min="0" max="100" step="0.5" oninput="calculateDividends()">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <div class="duration-selector">
+                            <div class="duration-option" data-months="6" onclick="setDuration(this)">6 Months</div>
+                            <div class="duration-option active" data-months="12" onclick="setDuration(this)">1 Year</div>
+                            <div class="duration-option" data-months="24" onclick="setDuration(this)">2 Years</div>
+                            <div class="duration-option" data-months="36" onclick="setDuration(this)">3 Years</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-results-pane">
+                    <div class="result-row">
+                        <div class="result-label">Modelled Monthly Amount</div>
+                        <div class="result-value" id="monthlyPayout">Rs. 0.00</div>
+                    </div>
+                    <div class="result-row">
+                        <div class="result-label">Modelled Cumulative Total</div>
+                        <div class="result-value total-payout" id="totalReturn">Rs. 0.00</div>
+                    </div>
+                    <div class="rate-notice">
+                        <i class="fas fa-info-circle"></i> Based on the sample rate you entered (<span id="rateNoticeDisplay">8%</span> per year) — not a guaranteed or historical rate.
+                    </div>
+                </div>
+
+                <div class="calc-footnote">
+                    <i class="fas fa-triangle-exclamation"></i>
+                    <span>This calculator is for illustration only. Actual returns depend on business performance and market conditions, can be lower than modelled, and are not guaranteed. Ask for the official plan document before investing.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-note">
+        <div class="container">
+            &copy; 2026 Kasagala Green Plantation, Galle. All Rights Reserved.
+            <p>All figures on this page are illustrative examples only and do not constitute a guarantee, offer, or financial advice.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedMonths = 12;
+
+        function setDuration(element) {
+            document.querySelectorAll('.duration-option').forEach(opt => opt.classList.remove('active'));
+            element.classList.add('active');
+            selectedMonths = parseInt(element.getAttribute('data-months'));
+            calculateDividends();
+        }
+
+        function calculateDividends() {
+            const principal = parseFloat(document.getElementById('investAmount').value) || 0;
+            const annualRatePct = parseFloat(document.getElementById('sampleRate').value) || 0;
+            const annualRate = annualRatePct / 100;
+
+            document.getElementById('rateNoticeDisplay').innerText = annualRatePct + "%";
+
+            const monthlyRate = annualRate / 12;
+            const monthlyPayoutValue = principal * monthlyRate;
+            const totalReturnValue = monthlyPayoutValue * selectedMonths;
+
+            document.getElementById('monthlyPayout').innerText = "Rs. " + monthlyPayoutValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('totalReturn').innerText = "Rs. " + totalReturnValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function scrollToPortfolio() {
+            const budget = document.getElementById('finderBudget').value;
+            const element = document.getElementById('portfolioSection');
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                document.querySelectorAll('.handbill-card').forEach(card => card.style.borderColor = "var(--line)");
+                const targetCard = document.getElementById('tier-' + budget);
+                if (targetCard) targetCard.style.borderColor = "var(--leaf-700)";
+            }
+        }
+
+        // Scroll-triggered reveal animation
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => io.observe(el));
+
+        window.onload = function() {
+            calculateDividends();
+        };
+
+        /* ---------- Light / Dark mode toggle ---------- */
+        /* Defaults to LIGHT (no class on body).
+           Uses the same 'kasagala-theme' localStorage key as the
+           other pages, so a visitor's preference carries across the site. */
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        try {
+            const savedTheme = localStorage.getItem('kasagala-theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeIcon.className = 'fas fa-sun';
+            }
+        } catch (e) {
+            /* localStorage unavailable (e.g. private browsing) - default to light mode */
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-mode');
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            try {
+                localStorage.setItem('kasagala-theme', isDark ? 'dark' : 'light');
+            } catch (e) {
+                /* ignore if storage is unavailable */
+            }
+        });
+    </script>
+</body>
+</html>

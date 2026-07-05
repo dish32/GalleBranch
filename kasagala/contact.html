@@ -1,0 +1,1244 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Galle Branch - Kasagala Group of Companies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+ 
+    <style>
+        /* --- Global Reset & Fonts --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+ 
+        :root {
+            --primary-green: #116936;
+            --deep-green: #0a3d20;
+            --light-green: #79b443;
+            --dark-neutral: #333333;
+            --text-color: #555555;
+            --white: #ffffff;
+            --bg-light: #f4f7f4;
+            --gold: #d4af37;
+            --font-display: 'Fraunces', Georgia, serif;
+            --transition-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+            /* Dark-mode palette */
+            --bg-dark-main: #0f172a;
+            --bg-dark-card: #1e293b;
+            --border-dim: #334155;
+            --text-dark: #cbd5e1;
+        }
+ 
+        html {
+            scroll-behavior: smooth;
+        }
+ 
+        body {
+            background-color: #fcfcfc;
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+ 
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+ 
+        ::selection {
+            background: var(--light-green);
+            color: #0a2913;
+        }
+ 
+        /* --- Scroll progress bar --- */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary-green), var(--light-green));
+            z-index: 3000;
+            transition: width 0.1s ease-out;
+        }
+ 
+        /* --- Scroll-Animation Classes --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+        }
+ 
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+ 
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+ 
+        /* --- Top Info Bar --- */
+        .top-bar {
+            background-color: #f7f9f6;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 8px 0;
+            font-size: 13px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+ 
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+ 
+        .social-icons a {
+            color: var(--primary-green);
+            margin-right: 12px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s var(--transition-smooth), color 0.3s;
+        }
+ 
+        .social-icons a:hover {
+            transform: scale(1.2) translateY(-2px);
+            color: var(--gold);
+        }
+ 
+        .contact-info span {
+            margin-left: 20px;
+            color: #555;
+            transition: color 0.4s ease;
+        }
+ 
+        .contact-info i {
+            color: var(--light-green);
+            margin-right: 5px;
+        }
+ 
+        .contact-info a {
+            color: #555;
+            text-decoration: none;
+        }
+ 
+        /* --- Main Header & Nav --- */
+        .main-header {
+            background-color: rgba(255,255,255,0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: padding 0.35s var(--transition-smooth), box-shadow 0.35s var(--transition-smooth), background-color 0.4s ease;
+        }
+ 
+        .main-header.scrolled {
+            padding: 8px 0;
+            box-shadow: 0 8px 25px rgba(17,105,54,0.12);
+        }
+ 
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+ 
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+ 
+        .brand-logo {
+            height: 55px;
+            margin-right: 12px;
+            transition: height 0.35s var(--transition-smooth);
+        }
+ 
+        .main-header.scrolled .brand-logo {
+            height: 42px;
+        }
+ 
+        .brand-text h1 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--primary-green);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+            transition: color 0.4s ease;
+        }
+ 
+        .brand-text h2 {
+            font-size: 12px;
+            color: var(--light-green);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+ 
+        .nav-area {
+            display: flex;
+            align-items: center;
+        }
+ 
+        .nav-menu ul {
+            display: flex;
+            list-style: none;
+        }
+ 
+        .nav-menu ul li {
+            margin-left: 22px;
+        }
+ 
+        .nav-menu ul li a {
+            text-decoration: none;
+            color: var(--dark-neutral);
+            font-weight: 600;
+            font-size: 13.5px;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s;
+        }
+ 
+        .nav-menu ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-green);
+            transition: width 0.3s var(--transition-smooth);
+        }
+ 
+        .nav-menu ul li a:hover::after,
+        .nav-menu ul li a.active::after {
+            width: 100%;
+        }
+ 
+        .nav-menu ul li a:hover,
+        .nav-menu ul li a.active {
+            color: var(--light-green);
+        }
+ 
+        /* --- Light / Dark mode toggle button --- */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            background: var(--white);
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 26px;
+            font-size: 15px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: background-color 0.3s, color 0.3s, transform 0.3s var(--transition-smooth), border-color 0.3s;
+        }
+ 
+        .theme-toggle:hover {
+            transform: scale(1.08) rotate(-8deg);
+            border-color: var(--light-green);
+        }
+ 
+        .theme-toggle:active {
+            transform: scale(0.94);
+        }
+ 
+        /* --- Hero Banner --- */
+        .sub-hero {
+            position: relative;
+            background-image: url('office5.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 320px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+ 
+        .sub-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(360deg, rgba(17, 105, 54, 0.88) 0%, rgba(10, 20, 15, 0.92) 100%);
+            z-index: 1;
+            transition: background 0.4s ease;
+        }
+ 
+        .sub-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            color: var(--white);
+        }
+ 
+        .sub-hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11.5px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #cfe8bd;
+            margin-bottom: 14px;
+            opacity: 0;
+            animation: fadeInDown 0.9s var(--transition-smooth) 0.05s forwards;
+        }
+ 
+        .sub-hero-eyebrow::before,
+        .sub-hero-eyebrow::after {
+            content: '';
+            width: 26px;
+            height: 1px;
+            background: #cfe8bd;
+        }
+ 
+        .sub-hero-content h2 {
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            animation: fadeInDown 0.9s var(--transition-smooth) 0.18s both;
+        }
+ 
+        .sub-hero-content p {
+            font-size: 16px;
+            color: #e2e8f0;
+            max-width: 620px;
+            margin: 0 auto;
+            animation: fadeInUp 0.9s var(--transition-smooth) 0.32s both;
+        }
+ 
+        /* --- Contact Content Grid --- */
+        .contact-section {
+            padding: 90px 0;
+            transition: background-color 0.4s ease;
+        }
+ 
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: start;
+        }
+ 
+        /* --- Left Side: Cards --- */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+ 
+        .info-card {
+            background: var(--white);
+            padding: 28px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-green);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease, background-color 0.4s ease;
+        }
+ 
+        .info-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(17,105,54,0.14);
+        }
+ 
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--bg-light);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            transition: background-color 0.4s ease, color 0.4s ease, transform 0.4s var(--transition-smooth);
+        }
+ 
+        .info-card:hover .card-icon {
+            background-color: var(--primary-green);
+            color: var(--white);
+            transform: rotate(-8deg) scale(1.05);
+        }
+ 
+        .card-details h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--dark-neutral);
+            margin-bottom: 8px;
+            font-weight: 700;
+            transition: color 0.4s ease;
+        }
+ 
+        .card-details p, .card-details a {
+            font-size: 15px;
+            color: var(--text-color);
+            line-height: 1.6;
+            text-decoration: none;
+            transition: color 0.4s ease;
+        }
+ 
+        .card-details a:hover {
+            color: var(--primary-green);
+        }
+ 
+        .card-details a.fb-link {
+            color: #1877f2;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+            transition: opacity 0.2s, gap 0.3s;
+        }
+ 
+        .card-details a.fb-link:hover {
+            opacity: 0.8;
+            gap: 9px;
+        }
+ 
+        /* --- Small Dynamic Animated Gallery Grid --- */
+        .branch-gallery-wrapper {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 3px solid var(--light-green);
+            transition: background-color 0.4s ease;
+        }
+ 
+        .branch-gallery-wrapper h4 {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--dark-neutral);
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.4s ease;
+        }
+ 
+        .branch-gallery-wrapper h4 i {
+            color: var(--light-green);
+        }
+ 
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+ 
+        .gallery-item {
+            position: relative;
+            height: 85px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            cursor: pointer;
+            background-color: #eee;
+            border: 2px solid transparent;
+            transition: transform 0.4s var(--transition-smooth),
+                        box-shadow 0.4s var(--transition-smooth),
+                        border-color 0.4s var(--transition-smooth);
+        }
+ 
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s var(--transition-smooth);
+        }
+ 
+        .gallery-item:hover {
+            transform: scale(1.08) translateY(-4px);
+            box-shadow: 0 10px 20px rgba(17, 105, 54, 0.2);
+            border-color: var(--light-green);
+            z-index: 10;
+        }
+ 
+        .gallery-item:hover img {
+            transform: scale(1.15);
+        }
+ 
+        /* --- Right Side: Message Form --- */
+        .form-panel {
+            background: var(--white);
+            padding: 42px;
+            border-radius: 12px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.4s ease;
+        }
+ 
+        .form-panel::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(121,180,67,0.12), transparent 70%);
+            pointer-events: none;
+        }
+ 
+        .form-panel h3 {
+            font-family: var(--font-display);
+            font-size: 25px;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+ 
+        .form-panel p {
+            font-size: 14px;
+            margin-bottom: 30px;
+            transition: color 0.4s ease;
+        }
+ 
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+ 
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-neutral);
+            margin-bottom: 8px;
+            transition: color 0.4s ease;
+        }
+ 
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #fafafa;
+            color: var(--dark-neutral);
+            transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s, color 0.3s;
+        }
+ 
+        .form-control:focus {
+            outline: none;
+            border-color: var(--light-green);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(121,180,67,0.14);
+        }
+ 
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+ 
+        .submit-btn {
+            background: linear-gradient(120deg, var(--primary-green), var(--deep-green));
+            color: var(--white);
+            border: none;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.3s var(--transition-smooth), box-shadow 0.3s, gap 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 6px 18px rgba(17,105,54,0.25);
+        }
+ 
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(17,105,54,0.4);
+            gap: 14px;
+        }
+ 
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+ 
+        .submit-btn.sending {
+            opacity: 0.75;
+            pointer-events: none;
+        }
+ 
+        /* Toast confirmation replacing the plain alert() popup */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: var(--white);
+            border-left: 4px solid var(--primary-green);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+            border-radius: 8px;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--dark-neutral);
+            font-weight: 600;
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.4s var(--transition-smooth), opacity 0.4s var(--transition-smooth);
+            z-index: 4000;
+        }
+ 
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+ 
+        .toast i {
+            color: var(--light-green);
+            font-size: 20px;
+        }
+ 
+        /* --- Map Section --- */
+        .map-section {
+            width: 100%;
+            height: 450px;
+            background-color: #e5e5e5;
+            border-top: 1px solid #e2e8f0;
+            position: relative;
+        }
+ 
+        .map-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(0.15) contrast(1.05);
+        }
+ 
+        /* --- Keyframes --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+ 
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+ 
+        /* --- Footer --- */
+        footer {
+            background-color: #1a221e;
+            color: #b3bcba;
+            padding: 60px 0 30px;
+            font-size: 14px;
+            transition: background-color 0.4s ease;
+        }
+ 
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+ 
+        .footer-col h4 {
+            font-family: var(--font-display);
+            color: var(--white);
+            font-size: 16px;
+            margin-bottom: 20px;
+            letter-spacing: 0.3px;
+            position: relative;
+        }
+ 
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 30px;
+            height: 2px;
+            background-color: var(--light-green);
+        }
+ 
+        .footer-col ul {
+            list-style: none;
+        }
+ 
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+ 
+        .footer-col ul li a {
+            color: #b3bcba;
+            text-decoration: none;
+            transition: color 0.3s, padding-left 0.3s;
+        }
+ 
+        .footer-col ul li a:hover {
+            color: var(--light-green);
+            padding-left: 6px;
+        }
+ 
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #2e3a34;
+            font-size: 13px;
+        }
+ 
+        /* --- Back to top button --- */
+        .back-to-top {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(120deg, var(--primary-green), var(--light-green));
+            color: var(--white);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: opacity 0.35s var(--transition-smooth), transform 0.35s var(--transition-smooth), visibility 0.35s;
+            z-index: 900;
+        }
+ 
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+ 
+        .back-to-top:hover {
+            transform: translateY(-4px);
+        }
+ 
+        /* =========================================================
+           DARK MODE THEME OVERRIDES
+           Toggled by adding class="dark-mode" to <body>
+           This page defaults to the light corporate theme, so
+           dark-mode is the opt-in variant here (matching services.html).
+           ========================================================= */
+        body.dark-mode {
+            background-color: var(--bg-dark-main);
+            color: var(--text-dark);
+        }
+ 
+        body.dark-mode .top-bar {
+            background-color: #0b111e;
+            border-bottom: 1px solid var(--border-dim);
+        }
+ 
+        body.dark-mode .contact-info span,
+        body.dark-mode .contact-info a {
+            color: #94a3b8;
+        }
+ 
+        body.dark-mode .main-header {
+            background-color: rgba(30, 41, 59, 0.88);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+        }
+ 
+        body.dark-mode .brand-text h1 {
+            color: #ffffff;
+        }
+ 
+        body.dark-mode .nav-menu ul li a {
+            color: #cbd5e1;
+        }
+ 
+        body.dark-mode .nav-menu ul li a:hover,
+        body.dark-mode .nav-menu ul li a.active {
+            color: var(--light-green);
+        }
+ 
+        body.dark-mode .theme-toggle {
+            background: var(--bg-dark-card);
+            border-color: var(--border-dim);
+            color: var(--light-green);
+            box-shadow: none;
+        }
+ 
+        body.dark-mode .sub-hero-overlay {
+            background: linear-gradient(360deg, rgba(10, 20, 15, 0.93) 0%, rgba(5, 10, 8, 0.96) 100%);
+        }
+ 
+        body.dark-mode .info-card {
+            background: var(--bg-dark-card);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+ 
+        body.dark-mode .card-icon {
+            background-color: var(--bg-dark-main);
+            color: var(--light-green);
+        }
+ 
+        body.dark-mode .info-card:hover .card-icon {
+            background-color: var(--primary-green);
+            color: #ffffff;
+        }
+ 
+        body.dark-mode .card-details h3 {
+            color: #ffffff;
+        }
+ 
+        body.dark-mode .card-details p,
+        body.dark-mode .card-details a {
+            color: #94a3b8;
+        }
+ 
+        body.dark-mode .card-details a:hover {
+            color: var(--light-green);
+        }
+ 
+        body.dark-mode .branch-gallery-wrapper {
+            background: var(--bg-dark-card);
+        }
+ 
+        body.dark-mode .branch-gallery-wrapper h4 {
+            color: #ffffff;
+        }
+ 
+        body.dark-mode .gallery-item {
+            background-color: var(--border-dim);
+        }
+ 
+        body.dark-mode .form-panel {
+            background: var(--bg-dark-card);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+        }
+ 
+        body.dark-mode .form-panel p {
+            color: #94a3b8;
+        }
+ 
+        body.dark-mode .form-group label {
+            color: #cbd5e1;
+        }
+ 
+        body.dark-mode .form-control {
+            background-color: #0f172a;
+            border-color: var(--border-dim);
+            color: #e2e8f0;
+        }
+ 
+        body.dark-mode .form-control:focus {
+            background-color: #0f172a;
+        }
+ 
+        body.dark-mode .toast {
+            background: var(--bg-dark-card);
+            color: #e2e8f0;
+        }
+ 
+        body.dark-mode .map-section {
+            background-color: #0b111e;
+            border-top: 1px solid var(--border-dim);
+        }
+ 
+        body.dark-mode .map-section iframe {
+            filter: grayscale(0.25) contrast(1.05) invert(0.92) hue-rotate(180deg);
+        }
+ 
+        body.dark-mode footer {
+            background-color: #05070a;
+        }
+ 
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+ 
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+ 
+        @media (max-width: 768px) {
+            .top-bar-content, .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            .contact-info span {
+                display: block;
+                margin: 6px 0;
+            }
+            .nav-area {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-menu ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-menu ul li {
+                margin: 6px 12px;
+            }
+            .theme-toggle {
+                margin-left: 0;
+            }
+            .sub-hero {
+                height: 240px;
+                background-attachment: scroll;
+            }
+            .sub-hero-content h2 { font-size: 28px; }
+            .form-panel {
+                padding: 25px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .back-to-top {
+                bottom: 18px;
+                left: 18px;
+                width: 42px;
+                height: 42px;
+            }
+            .toast {
+                right: 16px;
+                left: 16px;
+                bottom: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="scroll-progress" id="scrollProgress"></div>
+ 
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/g/1UnfrDYN6G/?mibextid=wwXIfr" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.youtube.com/channel/UCtyEEgrq95-OBEe2gvAyx_Q" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="contact-info">
+                <span><i class="fas fa-map-marker-alt"></i> No 219 Colombo road, Kaluwella, Galle</span>
+                <span><i class="fas fa-phone-alt"></i> 091 31 58 200</span>
+            </div>
+        </div>
+    </div>
+ 
+    <header class="main-header" id="mainHeader">
+        <div class="container header-content">
+            <div class="logo-area">
+                <img src="logo.jpg" alt="Kasagala Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>KASAGALA GROUP</h1>
+                    <h2>OF COMPANIES &mdash; GALLE</h2>
+                </div>
+            </div>
+            <div class="nav-area">
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="awords.html">AWARDS</a></li>
+                        <li><a href="proposal.html">PROPOSALS</a></li>
+                        <li><a href="investmentPlan.html">INVESTMENT PLANS</a></li>
+                        <li><a href="services.html">SERVICES</a></li>
+                        <li><a href="aboutUs.html">ABOUT US</a></li>
+                        <li><a href="contact.html" class="active">CONTACT</a></li>
+                        <li><a href="galle.html">OPEN DAY</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode" title="Toggle light / dark mode">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+ 
+    <section class="sub-hero">
+        <div class="sub-hero-overlay"></div>
+        <div class="container sub-hero-content">
+            <span class="sub-hero-eyebrow">We'd Love To Hear From You</span>
+            <h2>Galle Branch</h2>
+            <p>Get in touch with our regional headquarters for structural inquiries, service management, or business consultations.</p>
+        </div>
+    </section>
+ 
+    <section class="contact-section">
+        <div class="container contact-grid">
+ 
+            <div class="info-panel">
+ 
+                <div class="info-card reveal">
+                    <div class="card-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="card-details">
+                        <h3>Our Address</h3>
+                        <p>No 219 Colombo road,<br>Kaluwella, Galle,<br>Sri Lanka.</p>
+                    </div>
+                </div>
+ 
+                <div class="info-card reveal stagger-delay-1">
+                    <div class="card-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="card-details">
+                        <h3>Contact Numbers</h3>
+                        <p><a href="tel:0913158200">091 31 58 200</a></p>
+                        <p style="font-size: 13px; color: #888; margin-top: 3px;">Mon - Fri: 8:30 AM - 4.00 PM</p>
+                    </div>
+                </div>
+ 
+                <div class="info-card reveal stagger-delay-2">
+                    <div class="card-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <div class="card-details">
+                        <h3>Email Inquiries</h3>
+                        <p><a href="mailto:kasagalaplantation@gmail.com">kasagalaplantation@gmail.com</a></p>
+                    </div>
+                </div>
+ 
+                <div class="info-card reveal stagger-delay-3">
+                    <div class="card-icon">
+                        <i class="fab fa-facebook-messenger"></i>
+                    </div>
+                    <div class="card-details">
+                        <h3>Galle Community</h3>
+                        <p>Connect directly with our branch network community page:</p>
+                        <a href="https://www.facebook.com/share/g/1UnfrDYN6G/?mibextid=wwXIfr" target="_blank" class="fb-link">
+                            <i class="fab fa-facebook"></i> Visit Galle Facebook Page
+                        </a>
+                    </div>
+                </div>
+ 
+                <div class="branch-gallery-wrapper reveal stagger-delay-4">
+                    <h4><i class="fas fa-images"></i> Branch Gallery Preview</h4>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="office1.jpg" alt="Galle Office Interior Area 1">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Office2.jpg" alt="Galle Office Workspace Area 2">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="office3.jpg" alt="Galle Office Boardroom Area 3">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="office6.jpg" alt="Galle Headquarters Facilities 4">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="office7.jpg" alt="Galle Corporate Lobby Area 5">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="office10.jpg" alt="Galle Medical & Administrative Care Area 6">
+                        </div>
+                    </div>
+                </div>
+ 
+            </div>
+ 
+            <div class="form-panel reveal">
+                <h3>Send Us a Message</h3>
+                <p>Fill out the inquiry form below and a business representative from our Galle team will respond shortly.</p>
+ 
+                <form id="contactForm" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" class="form-control" placeholder="John Doe" required>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label for="emailAddr">Email Address</label>
+                        <input type="email" id="emailAddr" class="form-control" placeholder="example@domain.com" required>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label for="phoneNum">Phone Number</label>
+                        <input type="tel" id="phoneNum" class="form-control" placeholder="07X XXX XXXX">
+                    </div>
+ 
+                    <div class="form-group">
+                        <label for="sectorSelection">Inquiry Sector</label>
+                        <select id="sectorSelection" class="form-control">
+                            <option>General Corporate Inquiry</option>
+                            <option>Green Super & Plantation</option>
+                            <option>Import & Export Solutions</option>
+                            <option>Hotel & Luxury Resorts</option>
+                            <option>Construction & Apartments</option>
+                            <option>Medical Investments & Care</option>
+                        </select>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label for="messageBody">Your Message</label>
+                        <textarea id="messageBody" class="form-control" placeholder="Type details regarding your requirement here..." required></textarea>
+                    </div>
+ 
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Send Message <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+ 
+        </div>
+    </section>
+ 
+    <div class="map-section reveal">
+        <iframe src="https://maps.google.com/maps?q=No%20219%20Colombo%20road,%20Kaluwella,%20Galle&t=&z=15&ie=UTF-8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+ 
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Kasagala Group</h4>
+                <p style="line-height: 1.6; margin-top: 10px;">Securing a high quality of corporate resilience and localized economic value options across communities.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="services.html">Our Services</a></li>
+                    <li><a href="investmentPlan.html">Investment Plans</a></li>
+                    <li><a href="proposal.html">Proposals</a></li>
+                    <li><a href="aboutUs.html">About Our Journey</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support & Contact</h4>
+                <ul>
+                    <li><i class="fas fa-phone-alt" style="color: var(--light-green); margin-right: 8px;"></i> 091 31 58 200</li>
+                    <li><i class="fas fa-envelope" style="color: var(--light-green); margin-right: 8px;"></i> kasagalaplantation@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; Copyright 2026 Kasagala Green Plantation Galle. All Rights Reserved. Design by: Dishani Mampitiya</p>
+            </div>
+        </div>
+    </footer>
+ 
+    <button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+ 
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>Thank you! Your message has been sent to our Galle Branch.</span>
+    </div>
+ 
+    <script>
+        /* ---------- Scroll reveal ---------- */
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                obs.unobserve(entry.target);
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+        revealElements.forEach(el => observer.observe(el));
+ 
+        /* ---------- Sticky header + scroll progress + back-to-top ---------- */
+        const mainHeader = document.getElementById('mainHeader');
+        const backToTop = document.getElementById('backToTop');
+        const scrollProgress = document.getElementById('scrollProgress');
+ 
+        function handleScroll() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            mainHeader.classList.toggle('scrolled', scrollY > 50);
+            backToTop.classList.toggle('visible', scrollY > 500);
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+            scrollProgress.style.width = progress + '%';
+        }
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+ 
+        /* ---------- Contact form submission with toast confirmation ---------- */
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const toast = document.getElementById('toast');
+ 
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            submitBtn.classList.add('sending');
+            submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+ 
+            setTimeout(() => {
+                submitBtn.classList.remove('sending');
+                submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+                toast.classList.add('show');
+                contactForm.reset();
+                setTimeout(() => toast.classList.remove('show'), 4000);
+            }, 700);
+        });
+ 
+        /* ---------- Light / Dark mode toggle ---------- */
+        /* Defaults to LIGHT (no class on body).
+           Uses the same 'kasagala-theme' localStorage key as the
+           other pages, so a visitor's preference carries across the site. */
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+ 
+        try {
+            const savedTheme = localStorage.getItem('kasagala-theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeIcon.className = 'fas fa-sun';
+            }
+        } catch (e) {
+            /* localStorage unavailable (e.g. private browsing) - default to light mode */
+        }
+ 
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-mode');
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            try {
+                localStorage.setItem('kasagala-theme', isDark ? 'dark' : 'light');
+            } catch (e) {
+                /* ignore if storage is unavailable */
+            }
+        });
+    </script>
+</body>
+</html>

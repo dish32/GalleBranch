@@ -1,0 +1,1272 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Kasagala Group of Companies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+    <style>
+        /* ============================================================
+           TOKENS
+        ============================================================ */
+        :root {
+            --forest:        #0b3d24;   /* deep forest green - headlines, dark surfaces */
+            --forest-deep:    #062817;  /* darker gradient stop */
+            --leaf:           #6fae3e;  /* fresh leaf green - primary accent, inherited brand color */
+            --leaf-soft:      #a7cf83;
+            --gold:           #b9862f;  /* harvest gold - honors / premium accents */
+            --gold-soft:      #e7c983;
+            --cream:          #f9f6ef;  /* warm section background */
+            --mist:           #eef2ea;  /* secondary section background */
+            --ink:            #1d261e;  /* body text */
+            --ink-soft:       #5b6459;  /* muted text */
+            --white:          #ffffff;
+            --line:           #e3e2d8;
+ 
+            --display: 'Fraunces', serif;
+            --body: 'Work Sans', sans-serif;
+ 
+            --ease: cubic-bezier(.22, 1, .36, 1);
+ 
+            /* Dark-mode palette (shared with contact.html / galle.html) */
+            --bg-dark-main: #0f172a;
+            --bg-dark-card: #1e293b;
+            --border-dim:   #334155;
+            --text-dark:    #cbd5e1;
+        }
+ 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+        html { scroll-behavior: smooth; }
+ 
+        body {
+            background-color: var(--cream);
+            color: var(--ink);
+            font-family: var(--body);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background-color .4s ease, color .4s ease;
+        }
+ 
+        .container {
+            width: 87%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+ 
+        img { display: block; max-width: 100%; }
+ 
+        a { color: inherit; }
+ 
+        ::selection { background: var(--leaf); color: var(--white); }
+ 
+        /* focus visibility */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 3px;
+        }
+ 
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+ 
+        /* ============================================================
+           REVEAL-ON-SCROLL UTILITY
+        ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .8s var(--ease), transform .8s var(--ease);
+        }
+        .reveal.in-view { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1.in-view { transition-delay: .1s; }
+        .reveal-delay-2.in-view { transition-delay: .2s; }
+        .reveal-delay-3.in-view { transition-delay: .3s; }
+        .reveal-delay-4.in-view { transition-delay: .4s; }
+ 
+        /* ============================================================
+           TOP INFO BAR
+        ============================================================ */
+        .top-bar {
+            background-color: var(--forest);
+            color: #cfe3d3;
+            padding: 9px 0;
+            font-size: 12.5px;
+            letter-spacing: .2px;
+        }
+ 
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+ 
+        .social-icons a {
+            color: #cfe3d3;
+            margin-right: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: color .25s var(--ease), transform .25s var(--ease);
+        }
+ 
+        .social-icons a:hover {
+            color: var(--gold-soft);
+            transform: translateY(-2px);
+        }
+ 
+        .contact-info span {
+            margin-left: 22px;
+            color: #cfe3d3;
+        }
+ 
+        .contact-info i { color: var(--gold-soft); margin-right: 6px; }
+ 
+        .contact-info a {
+            color: #cfe3d3;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color .25s;
+        }
+        .contact-info a:hover { border-color: var(--gold-soft); }
+ 
+        /* ============================================================
+           MAIN HEADER / NAV
+        ============================================================ */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid transparent;
+            transition: padding .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease), background-color .4s ease;
+        }
+ 
+        .main-header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 8px 24px rgba(11, 61, 36, 0.08);
+            border-bottom-color: var(--line);
+        }
+ 
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+ 
+        .logo-area { display: flex; align-items: center; }
+ 
+        .brand-logo {
+            height: 52px;
+            margin-right: 12px;
+            transition: height .35s var(--ease);
+        }
+        .main-header.scrolled .brand-logo { height: 40px; }
+ 
+        .brand-text h1 {
+            font-family: var(--display);
+            font-size: 20px;
+            color: var(--forest);
+            font-weight: 700;
+            letter-spacing: .4px;
+            line-height: 1.15;
+            transition: color .4s ease;
+        }
+ 
+        .brand-text h2 {
+            font-size: 11.5px;
+            color: var(--leaf);
+            font-weight: 600;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+        }
+ 
+        .nav-area {
+            display: flex;
+            align-items: center;
+        }
+ 
+        .nav-menu ul { display: flex; list-style: none; }
+ 
+        .nav-menu ul li { margin-left: 26px; }
+ 
+        .nav-menu ul li a {
+            position: relative;
+            text-decoration: none;
+            color: var(--ink);
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: .3px;
+            text-transform: uppercase;
+            padding-bottom: 4px;
+            transition: color .3s var(--ease);
+        }
+ 
+        .nav-menu ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--gold);
+            transition: width .3s var(--ease);
+        }
+ 
+        .nav-menu ul li a:hover,
+        .nav-menu ul li a.active {
+            color: var(--leaf);
+        }
+ 
+        .nav-menu ul li a:hover::after,
+        .nav-menu ul li a.active::after { width: 100%; }
+ 
+        /* --- Light / Dark mode toggle button --- */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--white);
+            color: var(--forest);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 26px;
+            font-size: 15px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: background-color .3s, color .3s, transform .3s var(--ease), border-color .3s;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.08) rotate(-8deg);
+            border-color: var(--leaf);
+        }
+        .theme-toggle:active { transform: scale(0.94); }
+ 
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .about-hero {
+            position: relative;
+            background-image: url('cover2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 460px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+ 
+        .about-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(111, 174, 62, 0.35), transparent 55%),
+                linear-gradient(180deg, rgba(6, 40, 23, 0.92), rgba(11, 61, 36, 0.88));
+            z-index: 1;
+        }
+ 
+        /* drifting leaf motes */
+        .leaf-field { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+        .leaf {
+            position: absolute;
+            bottom: -60px;
+            opacity: 0;
+            animation: drift 16s linear infinite;
+        }
+        .leaf svg { width: 100%; height: 100%; }
+        .leaf:nth-child(1) { left: 8%;  width: 26px; height: 26px; animation-delay: 0s;  animation-duration: 15s; }
+        .leaf:nth-child(2) { left: 22%; width: 18px; height: 18px; animation-delay: 3s;  animation-duration: 19s; }
+        .leaf:nth-child(3) { left: 40%; width: 30px; height: 30px; animation-delay: 6s;  animation-duration: 14s; }
+        .leaf:nth-child(4) { left: 58%; width: 20px; height: 20px; animation-delay: 1.5s;animation-duration: 20s; }
+        .leaf:nth-child(5) { left: 74%; width: 24px; height: 24px; animation-delay: 8s;  animation-duration: 17s; }
+        .leaf:nth-child(6) { left: 88%; width: 16px; height: 16px; animation-delay: 4.5s;animation-duration: 22s; }
+ 
+        @keyframes drift {
+            0%   { transform: translateY(0) translateX(0) rotate(0deg);   opacity: 0; }
+            10%  { opacity: .55; }
+            90%  { opacity: .45; }
+            100% { transform: translateY(-540px) translateX(40px) rotate(220deg); opacity: 0; }
+        }
+ 
+        .about-hero .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--white);
+        }
+ 
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+            font-weight: 600;
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: fadeUp .9s var(--ease) .1s forwards;
+        }
+ 
+        .about-hero h1 {
+            font-family: var(--display);
+            font-size: 52px;
+            font-weight: 600;
+            font-style: italic;
+            letter-spacing: .5px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease) .3s forwards;
+        }
+ 
+        .hero-underline {
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--leaf-soft));
+            margin: 0 auto 22px;
+            animation: growLine 1s var(--ease) .9s forwards;
+        }
+ 
+        .about-hero p {
+            font-size: 17px;
+            color: #dfeee2;
+            max-width: 640px;
+            margin: 0 auto;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease) .55s forwards;
+        }
+ 
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes growLine {
+            from { width: 0; }
+            to   { width: 84px; }
+        }
+ 
+        /* ============================================================
+           SHARED SECTION LAYOUT
+        ============================================================ */
+        .section-padding { padding: 96px 0; }
+ 
+        .section-title { text-align: center; margin-bottom: 56px; }
+ 
+        .section-eyebrow {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+ 
+        .section-title h2 {
+            font-family: var(--display);
+            color: var(--forest);
+            font-size: 34px;
+            font-weight: 600;
+            letter-spacing: .3px;
+            transition: color .4s ease;
+        }
+ 
+        .title-underline {
+            width: 56px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--leaf), var(--gold));
+            margin: 14px auto 0;
+            border-radius: 2px;
+        }
+ 
+        /* ============================================================
+           CORPORATE INTRODUCTION
+        ============================================================ */
+        .intro-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+ 
+        .intro-image { position: relative; }
+ 
+        .intro-image::before {
+            content: '';
+            position: absolute;
+            top: -18px;
+            left: -18px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--leaf-soft);
+            border-radius: 10px;
+            z-index: 0;
+        }
+ 
+        .intro-image img {
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 24px 50px rgba(11, 61, 36, 0.16);
+            z-index: 1;
+            transition: transform .5s var(--ease);
+        }
+        .intro-image:hover img { transform: translate(-6px, -6px); }
+ 
+        .intro-text .section-eyebrow { text-align: left; }
+ 
+        .intro-text h3 {
+            font-family: var(--display);
+            color: var(--forest);
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            transition: color .4s ease;
+        }
+ 
+        .intro-text p {
+            margin-bottom: 18px;
+            color: var(--ink-soft);
+            font-size: 15.5px;
+            transition: color .4s ease;
+        }
+ 
+        .sector-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+ 
+        .sector-chips span {
+            font-size: 12.5px;
+            font-weight: 600;
+            letter-spacing: .3px;
+            color: var(--forest);
+            background: var(--mist);
+            border: 1px solid var(--line);
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: all .3s var(--ease);
+        }
+ 
+        .sector-chips span:hover {
+            background: var(--forest);
+            color: var(--white);
+            border-color: var(--forest);
+            transform: translateY(-3px);
+        }
+ 
+        /* ============================================================
+           VISION / MISSION
+        ============================================================ */
+        .vision-mission-bg {
+            background: var(--mist);
+            position: relative;
+            transition: background-color .4s ease;
+        }
+ 
+        .vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+ 
+        .vm-card {
+            background: var(--white);
+            padding: 46px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(11, 61, 36, 0.05);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform .4s var(--ease), box-shadow .4s var(--ease), background-color .4s ease;
+        }
+ 
+        .vm-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--forest), var(--leaf));
+        }
+        .vm-card:last-child::before { background: linear-gradient(90deg, var(--leaf), var(--gold)); }
+ 
+        .vm-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(11, 61, 36, 0.12);
+        }
+ 
+        .vm-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--mist);
+            transition: transform .5s var(--ease), background-color .4s ease;
+        }
+        .vm-card:hover .vm-icon { transform: rotate(-8deg) scale(1.06); }
+        .vm-card:last-child .vm-icon { background: #f4ece0; }
+ 
+        .vm-card i { font-size: 30px; }
+        .vm-card .fa-eye { color: var(--forest); }
+        .vm-card .fa-bullseye { color: var(--gold); }
+ 
+        .vm-card h3 {
+            font-family: var(--display);
+            font-size: 21px;
+            color: var(--ink);
+            margin-bottom: 14px;
+            font-weight: 600;
+            transition: color .4s ease;
+        }
+ 
+        .vm-card p { color: var(--ink-soft); font-size: 14.5px; transition: color .4s ease; }
+ 
+        /* ============================================================
+           TIMELINE — "Growth Rings"
+        ============================================================ */
+        .timeline-container {
+            position: relative;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+ 
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: var(--line);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+            border-radius: 2px;
+            transition: background-color .4s ease;
+        }
+ 
+        .timeline-container .timeline-fill {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(180deg, var(--leaf), var(--gold));
+            top: 0;
+            left: 50%;
+            margin-left: -1.5px;
+            border-radius: 2px;
+            height: 0%;
+            transition: height 1.4s var(--ease);
+            z-index: 1;
+        }
+ 
+        .timeline-block {
+            padding: 14px 46px;
+            position: relative;
+            width: 50%;
+        }
+ 
+        .timeline-block .ring {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            right: -11px;
+            background: var(--white);
+            border: 4px solid var(--line);
+            top: 22px;
+            border-radius: 50%;
+            z-index: 2;
+            transition: border-color .5s var(--ease), transform .5s var(--ease), background-color .4s ease;
+        }
+ 
+        .timeline-block.in-view .ring {
+            border-color: var(--leaf);
+            transform: scale(1.15);
+        }
+ 
+        .left-block { left: 0; }
+        .right-block { left: 50%; }
+        .right-block .ring { left: -11px; }
+ 
+        .timeline-content {
+            padding: 26px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 10px 26px rgba(11, 61, 36, 0.05);
+            transition: box-shadow .35s var(--ease), transform .35s var(--ease), background-color .4s ease;
+        }
+ 
+        .timeline-content:hover {
+            box-shadow: 0 16px 34px rgba(11, 61, 36, 0.12);
+            transform: translateY(-4px);
+        }
+ 
+        .timeline-content .phase-tag {
+            font-size: 11.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+ 
+        .timeline-content h3 {
+            font-family: var(--display);
+            color: var(--forest);
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            transition: color .4s ease;
+        }
+ 
+        .timeline-content p { color: var(--ink-soft); font-size: 14.5px; transition: color .4s ease; }
+ 
+        .timeline-img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-top: 14px;
+            filter: grayscale(25%);
+            transition: filter .5s var(--ease), transform .5s var(--ease);
+        }
+        .timeline-content:hover .timeline-img { filter: grayscale(0%); transform: scale(1.02); }
+ 
+        /* ============================================================
+           SHOWCASE / HONORS
+        ============================================================ */
+        .showcase-section { background: var(--cream); transition: background-color .4s ease; }
+ 
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+ 
+        .showcase-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 26px rgba(11, 61, 36, 0.05);
+            position: relative;
+            transition: transform .45s var(--ease), box-shadow .45s var(--ease), background-color .4s ease;
+        }
+ 
+        .showcase-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 44px rgba(11, 61, 36, 0.14);
+        }
+ 
+        .showcase-img-box { width: 100%; height: 230px; overflow: hidden; position: relative; }
+ 
+        .showcase-img-box::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(6, 40, 23, 0.55));
+            opacity: 0;
+            transition: opacity .4s var(--ease);
+        }
+        .showcase-card:hover .showcase-img-box::after { opacity: 1; }
+ 
+        .showcase-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s var(--ease);
+        }
+ 
+        .showcase-card:hover .showcase-img-box img { transform: scale(1.08); }
+ 
+        .showcase-body { padding: 26px; position: relative; }
+ 
+        .showcase-body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 26px;
+            width: 34px; height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform .4s var(--ease);
+        }
+        .showcase-card:hover .showcase-body::before { transform: scaleX(1); }
+ 
+        .showcase-body h4 {
+            font-family: var(--display);
+            font-size: 18.5px;
+            color: var(--forest);
+            margin-bottom: 10px;
+            font-weight: 600;
+            transition: color .4s ease;
+        }
+ 
+        .showcase-body p { font-size: 14px; color: var(--ink-soft); transition: color .4s ease; }
+ 
+        /* ============================================================
+           CTA BANNER
+        ============================================================ */
+        .cta-banner {
+            position: relative;
+            background:
+                linear-gradient(120deg, rgba(6,40,23,.9), rgba(11,61,36,.82)),
+                url('office10.jpg');
+            background-size: 220% 220%, cover;
+            background-position: center;
+            animation: panGradient 14s ease-in-out infinite;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+ 
+        @keyframes panGradient {
+            0%, 100% { background-position: 0% 50%, center; }
+            50%      { background-position: 100% 50%, center; }
+        }
+ 
+        .cta-banner h2 {
+            font-family: var(--display);
+            font-size: 36px;
+            font-weight: 600;
+            font-style: italic;
+            margin-bottom: 16px;
+        }
+ 
+        .cta-banner p {
+            font-size: 17px;
+            max-width: 600px;
+            margin: 0 auto 34px;
+            color: #dcece0;
+            font-weight: 300;
+        }
+ 
+        .btn-main {
+            display: inline-block;
+            position: relative;
+            padding: 15px 38px;
+            background: var(--gold);
+            color: var(--forest-deep);
+            font-weight: 700;
+            font-size: 13.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 30px;
+            overflow: hidden;
+            transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+            box-shadow: 0 10px 26px rgba(185, 134, 47, 0.35);
+        }
+ 
+        .btn-main::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -60%;
+            width: 40%;
+            height: 100%;
+            background: rgba(255,255,255,.45);
+            transform: skewX(-20deg);
+            transition: left .6s var(--ease);
+        }
+ 
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 34px rgba(185, 134, 47, 0.45);
+        }
+        .btn-main:hover::before { left: 130%; }
+ 
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .footer-note {
+            background: var(--forest-deep);
+            color: #9db6a4;
+            text-align: center;
+            padding: 26px 0;
+            font-size: 13.5px;
+            border-top: 3px solid var(--leaf);
+        }
+ 
+        .footer-note a { color: var(--gold-soft); text-decoration: none; }
+ 
+        /* back-to-top */
+        .to-top {
+            position: fixed;
+            right: 26px;
+            bottom: 26px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--forest);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 10px 24px rgba(11,61,36,.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: all .35s var(--ease);
+            z-index: 999;
+        }
+        .to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .to-top:hover { background: var(--gold); color: var(--forest-deep); }
+ 
+        /* =========================================================
+           DARK MODE THEME OVERRIDES
+           Toggled by adding class="dark-mode" to <body>.
+           Shares the 'kasagala-theme' localStorage key with
+           contact.html and galle.html, so a visitor's preference
+           carries across the site.
+           ========================================================= */
+        body.dark-mode {
+            background-color: var(--bg-dark-main);
+            color: var(--text-dark);
+        }
+ 
+        body.dark-mode .main-header {
+            background-color: rgba(30, 41, 59, 0.9);
+            border-bottom-color: var(--border-dim);
+        }
+ 
+        body.dark-mode .brand-text h1 { color: #ffffff; }
+ 
+        body.dark-mode .nav-menu ul li a { color: #cbd5e1; }
+        body.dark-mode .nav-menu ul li a:hover,
+        body.dark-mode .nav-menu ul li a.active { color: var(--leaf-soft); }
+ 
+        body.dark-mode .theme-toggle {
+            background: var(--bg-dark-card);
+            border-color: var(--border-dim);
+            color: var(--gold-soft);
+            box-shadow: none;
+        }
+ 
+        body.dark-mode .section-title h2,
+        body.dark-mode .intro-text h3,
+        body.dark-mode .vm-card h3,
+        body.dark-mode .timeline-content h3,
+        body.dark-mode .showcase-body h4 {
+            color: #ffffff;
+        }
+ 
+        body.dark-mode .intro-text p,
+        body.dark-mode .vm-card p,
+        body.dark-mode .timeline-content p,
+        body.dark-mode .showcase-body p {
+            color: #94a3b8;
+        }
+ 
+        body.dark-mode .sector-chips span {
+            background: var(--bg-dark-card);
+            border-color: var(--border-dim);
+            color: var(--leaf-soft);
+        }
+        body.dark-mode .sector-chips span:hover {
+            background: var(--leaf);
+            color: var(--forest-deep);
+            border-color: var(--leaf);
+        }
+ 
+        body.dark-mode .vision-mission-bg { background: var(--bg-dark-card); }
+ 
+        body.dark-mode .vm-card {
+            background: var(--bg-dark-main);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        body.dark-mode .vm-icon { background: var(--bg-dark-card); }
+        body.dark-mode .vm-card:last-child .vm-icon { background: var(--bg-dark-card); }
+ 
+        body.dark-mode .timeline-container::after { background: var(--border-dim); }
+ 
+        body.dark-mode .timeline-block .ring {
+            background: var(--bg-dark-card);
+            border-color: var(--border-dim);
+        }
+        body.dark-mode .timeline-block.in-view .ring { border-color: var(--leaf); }
+ 
+        body.dark-mode .timeline-content {
+            background: var(--bg-dark-card);
+            box-shadow: 0 10px 26px rgba(0,0,0,0.3);
+        }
+ 
+        body.dark-mode .showcase-section { background: var(--bg-dark-main); }
+ 
+        body.dark-mode .showcase-card {
+            background: var(--bg-dark-card);
+            box-shadow: 0 10px 26px rgba(0,0,0,0.3);
+        }
+ 
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+ 
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 768px) {
+            .top-bar-content,
+            .header-content,
+            .intro-block,
+            .vm-grid {
+                flex-direction: column;
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 22px;
+            }
+            .contact-info span { display: block; margin: 4px 0 0; }
+            .nav-area { flex-direction: column; gap: 12px; }
+            .nav-menu ul { flex-wrap: wrap; justify-content: center; }
+            .nav-menu ul li { margin: 6px 10px; }
+            .theme-toggle { margin-left: 0; }
+            .about-hero { height: 320px; background-attachment: scroll; }
+            .about-hero h1 { font-size: 32px; }
+            .section-padding { padding: 64px 0; }
+            .sector-chips { justify-content: center; }
+ 
+            .timeline-container::after,
+            .timeline-container .timeline-fill { left: 26px; margin-left: 0; }
+            .timeline-block { width: 100%; padding-left: 60px; padding-right: 15px; }
+            .timeline-block .ring, .right-block .ring { left: 15px; right: auto; }
+            .right-block { left: 0; }
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="contact-info">
+                <span><i class="fas fa-map-marker-alt"></i> No 219 Colombo road, Kaluwella, Galle</span>
+                <span><i class="fas fa-envelope"></i> <a href="mailto:info@kasagalagreen.lk">info@kasagalagreen.lk</a></span>
+            </div>
+        </div>
+    </div>
+ 
+    <header class="main-header" id="mainHeader">
+        <div class="container header-content">
+            <div class="logo-area">
+                <img src="logo.jpg" alt="Kasagala Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>KASAGALA GROUP</h1>
+                    <h2>Of Companies — Galle</h2>
+                </div>
+            </div>
+            <div class="nav-area">
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="awords.html">Awards</a></li>
+                        <li><a href="proposal.html">Proposals</a></li>
+                        <li><a href="investmentPlan.html">Investment Plans</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="aboutUs.html" class="active">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="galle.html">Open Day</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode" title="Toggle light / dark mode">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+ 
+    <section class="about-hero">
+        <div class="about-hero-overlay"></div>
+        <div class="leaf-field">
+            <span class="leaf"><svg viewBox="0 0 24 24" fill="#a7cf83"><path d="M12 2C7 2 3 6 3 11c0 6 9 11 9 11s9-5 9-11c0-5-4-9-9-9zm0 15.5c-2.5-1.6-6-4.9-6-6.5 0-3.3 2.7-6 6-6s6 2.7 6 6c0 1.6-3.5 4.9-6 6.5z"/></svg></span>
+            <span class="leaf"><svg viewBox="0 0 24 24" fill="#e7c983"><path d="M12 2C7 2 3 6 3 11c0 6 9 11 9 11s9-5 9-11c0-5-4-9-9-9zm0 15.5c-2.5-1.6-6-4.9-6-6.5 0-3.3 2.7-6 6-6s6 2.7 6 6c0 1.6-3.5 4.9-6 6.5z"/></svg></span>
+            <span class="leaf"><svg viewBox="0 0 24 24" fill="#a7cf83"><path d="M12 2C7 2 3 6 3 11c0 6 9 11 9 11s9-5 9-11c0-5-4-9-9-9zm0 15.5c-2.5-1.6-6-4.9-6-6.5 0-3.3 2.7-6 6-6s6 2.7 6 6c0 1.6-3.5 4.9-6 6.5z"/></svg></span>
+            <span class="leaf"><svg viewBox="0 0 24 24" fill="#e7c983"><path d="M12 2C7 2 3 6 3 11c0 6 9 11 9 11s9-5 9-11c0-5-4-9-9-9zm0 15.5c-2.5-1.6-6-4.9-6-6.5 0-3.3 2.7-6 6-6s6 2.7 6 6c0 1.6-3.5 4.9-6 6.5z"/></svg></span>
+            <span class="leaf"><svg viewBox="0 0 24 24" fill="#a7cf83"><path d="M12 2C7 2 3 6 3 11c0 6 9 11 9 11s9-5 9-11c0-5-4-9-9-9zm0 15.5c-2.5-1.6-6-4.9-6-6.5 0-3.3 2.7-6 6-6s6 2.7 6 6c0 1.6-3.5 4.9-6 6.5z"/></svg></span>
+            <span class="leaf"><svg viewBox="0 0 24 24" fill="#e7c983"><path d="M12 2C7 2 3 6 3 11c0 6 9 11 9 11s9-5 9-11c0-5-4-9-9-9zm0 15.5c-2.5-1.6-6-4.9-6-6.5 0-3.3 2.7-6 6-6s6 2.7 6 6c0 1.6-3.5 4.9-6 6.5z"/></svg></span>
+        </div>
+        <div class="container">
+            <span class="hero-eyebrow">Est. Galle, Sri Lanka</span>
+            <h1>Who We Are</h1>
+            <div class="hero-underline"></div>
+            <p>Empowering multi-sector corporate ecosystems, regional operations, and highly sustainable infrastructure.</p>
+        </div>
+    </section>
+ 
+    <section class="section-padding">
+        <div class="container intro-block">
+            <div class="intro-image reveal">
+                <img src="office5.jpg" alt="Kasagala Main Workspace Banner">
+            </div>
+            <div class="intro-text reveal reveal-delay-1">
+                <span class="section-eyebrow">Corporate Introduction</span>
+                <h3>Pioneering Progress and Innovation</h3>
+                <p>The Kasagala Group of Companies represents a modern network of business sectors in Sri Lanka. Our organizational journey thrives on transparency, high corporate integrity, and a passion for eco-responsible development programs.</p>
+                <p>From our regional workspace hub in the Galle Branch, we direct critical processes that connect premium consumer lines, distribution channels, residential development layouts, and modern medical fields cleanly under one standard.</p>
+                <div class="sector-chips">
+                    <span>Agriculture</span>
+                    <span>Real Estate</span>
+                    <span>Logistics</span>
+                    <span>Retail &amp; Distribution</span>
+                    <span>Medical</span>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <section class="section-padding vision-mission-bg">
+        <div class="container">
+            <div class="vm-grid">
+                <div class="vm-card reveal">
+                    <div class="vm-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Our Vision</h3>
+                    <p>To stand as a respected nationwide benchmark for multi-industry business performance, driving green industrial initiatives and secure corporate solutions that elevate local communities.</p>
+                </div>
+                <div class="vm-card reveal reveal-delay-1">
+                    <div class="vm-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Our Mission</h3>
+                    <p>To produce consistent, transparent growth for stakeholders by integrating advanced operational management with reliable regional services, ensuring commercial targets support environmental health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="section-eyebrow">Growth, Year After Year</span>
+                <h2>Our Corporate Evolution</h2>
+                <div class="title-underline"></div>
+            </div>
+ 
+            <div class="timeline-container" id="timeline">
+                <div class="timeline-fill" id="timelineFill"></div>
+ 
+                <div class="timeline-block left-block">
+                    <span class="ring"></span>
+                    <div class="timeline-content">
+                        <span class="phase-tag">Phase 01</span>
+                        <h3>Foundational Strategies</h3>
+                        <p>Establishing our first distribution routes and structuring reliable agricultural production bases across key agricultural segments.</p>
+                        <img src="image1.jpg" class="timeline-img" alt="Foundational Strategies Image">
+                    </div>
+                </div>
+ 
+                <div class="timeline-block right-block">
+                    <span class="ring"></span>
+                    <div class="timeline-content">
+                        <span class="phase-tag">Phase 02</span>
+                        <h3>Sector Diversification</h3>
+                        <p>Branching successfully into imports, real estate structures, and premium logistics, backed by rigorous corporate management lines.</p>
+                        <img src="bellPeper.jpg" class="timeline-img" alt="Sector Diversification Image">
+                    </div>
+                </div>
+ 
+                <div class="timeline-block left-block">
+                    <span class="ring"></span>
+                    <div class="timeline-content">
+                        <span class="phase-tag">Phase 03</span>
+                        <h3>Regional Footprint &amp; Expansion</h3>
+                        <p>Launching optimized coordination hubs across major provinces to deliver prompt commercial pipelines and fast resource management.</p>
+                        <img src="cc.jpg" class="timeline-img" alt="Regional Footprint Image">
+                    </div>
+                </div>
+ 
+                <div class="timeline-block right-block">
+                    <span class="ring"></span>
+                    <div class="timeline-content">
+                        <span class="phase-tag">Phase 04</span>
+                        <h3>Modern Super Center Frameworks</h3>
+                        <p>Strengthening large-scale supply chains and high-volume outlets to ensure consumer requirements are handled effectively with top quality.</p>
+                        <img src="foodcity1.jpeg" class="timeline-img" alt="Super Center Frameworks Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <section class="section-padding showcase-section">
+        <div class="container">
+            <div class="section-title reveal">
+                <span class="section-eyebrow">Recognition &amp; Reach</span>
+                <h2>Honors &amp; Operations</h2>
+                <div class="title-underline"></div>
+            </div>
+ 
+            <div class="showcase-grid">
+                <div class="showcase-card reveal">
+                    <div class="showcase-img-box">
+                        <img src="aword.jpg" alt="Kasagala Excellence Reward Showcase">
+                    </div>
+                    <div class="showcase-body">
+                        <h4>Honored Enterprise Milestones</h4>
+                        <p>Our strict alignment with national enterprise benchmarks and continuous product quality management has secured top-tier corporate achievements.</p>
+                    </div>
+                </div>
+ 
+                <div class="showcase-card reveal reveal-delay-1">
+                    <div class="showcase-img-box">
+                        <img src="interview.jpg" alt="Executive Meeting and Strategic Alignments">
+                    </div>
+                    <div class="showcase-body">
+                        <h4>Strategic Collaborations</h4>
+                        <p>Working side-by-side with industry experts and corporate boards to align our regional operational directives with global commerce parameters.</p>
+                    </div>
+                </div>
+ 
+                <div class="showcase-card reveal reveal-delay-2">
+                    <div class="showcase-img-box">
+                        <img src="open1.jpg" alt="Logistics and Industrial Support Systems">
+                    </div>
+                    <div class="showcase-body">
+                        <h4>Infrastructural Capacity</h4>
+                        <p>Maintaining advanced machinery assets and specialized fleet units to ensure fast, safe product distributions across the nation's networks.</p>
+                    </div>
+                </div>
+ 
+                <div class="showcase-card reveal">
+                    <div class="showcase-img-box">
+                        <img src="image9.jpg" alt="Corporate Strategy and Training Seminars">
+                    </div>
+                    <div class="showcase-body">
+                        <h4>Standardized Administration</h4>
+                        <p>Conducting structured development briefings and performance evaluation loops to refine the capabilities of our executive staff teams.</p>
+                    </div>
+                </div>
+ 
+                <div class="showcase-card reveal reveal-delay-1">
+                    <div class="showcase-img-box">
+                        <img src="image8.jpg" alt="Advanced Agricultural Ecosystems">
+                    </div>
+                    <div class="showcase-body">
+                        <h4>Bio Cultivation &amp; Eco-Super</h4>
+                        <p>Implementing pure agricultural science principles across regional farmlands to grow premium materials without degrading ecological soil structures.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <section class="cta-banner">
+        <div class="container reveal">
+            <h2>Ready to Build a Green Tomorrow?</h2>
+            <p>Connect with our corporate office at Galle to explore investment packages, partner portals, and career development programs.</p>
+            <a href="contact.html" class="btn-main">Get in Touch with Us</a>
+        </div>
+    </section>
+ 
+    <div class="footer-note">
+        <div class="container">
+            &copy; Copyright 2026 Kasagala Green Plantation Galle. All Rights Reserved. Design by: Dishani Mampitiya
+        </div>
+    </div>
+ 
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+ 
+    <script>
+        // Sticky header shrink on scroll
+        const header = document.getElementById('mainHeader');
+        const toTop = document.getElementById('toTop');
+ 
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY > 40;
+            header.classList.toggle('scrolled', scrolled);
+            toTop.classList.toggle('show', window.scrollY > 500);
+        });
+ 
+        toTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+ 
+        // Generic reveal-on-scroll
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+ 
+        // Timeline blocks + growing fill line
+        const timelineBlocks = document.querySelectorAll('.timeline-block');
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('in-view');
+            });
+        }, { threshold: 0.4 });
+        timelineBlocks.forEach(el => timelineObserver.observe(el));
+ 
+        const timeline = document.getElementById('timeline');
+        const timelineFill = document.getElementById('timelineFill');
+ 
+        function updateTimelineFill() {
+            const rect = timeline.getBoundingClientRect();
+            const viewportH = window.innerHeight;
+            const total = rect.height;
+            const visible = Math.min(Math.max(viewportH * 0.6 - rect.top, 0), total);
+            const pct = Math.min((visible / total) * 100, 100);
+            timelineFill.style.height = pct + '%';
+        }
+        window.addEventListener('scroll', updateTimelineFill);
+        window.addEventListener('resize', updateTimelineFill);
+        updateTimelineFill();
+ 
+        /* ---------- Light / Dark mode toggle ---------- */
+        /* Defaults to LIGHT (no class on body). Uses the same
+           'kasagala-theme' localStorage key as contact.html and
+           galle.html, so a visitor's preference carries site-wide. */
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+ 
+        try {
+            const savedTheme = localStorage.getItem('kasagala-theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeIcon.className = 'fas fa-sun';
+            }
+        } catch (e) {
+            /* localStorage unavailable (e.g. private browsing) - default to light mode */
+        }
+ 
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-mode');
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            try {
+                localStorage.setItem('kasagala-theme', isDark ? 'dark' : 'light');
+            } catch (e) {
+                /* ignore if storage is unavailable */
+            }
+        });
+    </script>
+ 
+</body>
+</html>
